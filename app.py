@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -16,6 +16,14 @@ class Member(db.Model):
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/addname', methods=["post"])
+def addname():
+    name = request.form["name"]
+    newMember = Member(name=name)
+    db.session.add(newMember)
+    db.session.commit()
+    return redirect("/")
 
 ## おまじない
 if __name__ == "__main__":
