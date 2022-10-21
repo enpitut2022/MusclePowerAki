@@ -15,7 +15,8 @@ class Member(db.Model):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    members = Member.query.all()
+    return render_template('index.html', ms=members)
 
 @app.route('/addname', methods=["post"])
 def addname():
