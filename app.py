@@ -12,17 +12,25 @@ db = SQLAlchemy(app)
 class Member(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
+    status = db.Column(db.String(10), default="start")
 
 @app.route('/')
 def index():
-    members = Member.query.all()
+    members = Member.query.filter_by(status = "start").all()
     return render_template('index.html', ms=members)
 
 @app.route('/addname', methods=["post"])
 def addname():
     name = request.form["name"]
-    newMember = Member(name=name)
-    db.session.add(newMember)
+    memberSearch = Member.query.filter_by(name = name).first()
+    if memberSearch == None:
+        newMember = Member(name=name)
+        db.session.add(newMember)
+    else:
+        if memberSearch.status == "finish":
+            memberSearch.status = "start"
+        else:
+            memberSearch.status = "finish"
     db.session.commit()
     return redirect("/")
 
