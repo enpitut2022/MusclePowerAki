@@ -8,10 +8,13 @@
       <input type="text" name="name" required>
       <input type="submit" value="追加">
     </form>
-  <p>
-    {% for member in ms %}
-    {{member.name}}
-    {% endfor %}
-  </p>
+    <p>
+      アクティブ : {{mn}} 人
+    </p>
+    <p>
+      {% for member in ms %}
+      {{member.name}}
+      {% endfor %}
+    </p>
   </body>
 </html>
