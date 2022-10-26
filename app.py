@@ -37,7 +37,7 @@ def addname():
             lastdate = memberSearch.date
             diff = nowdate - lastdate
             # if diff.seconds >= 23*60*60 and diff.seconds <= 25*60*60:
-            if diff.seconds >= 30:
+            if diff.seconds >= 30 and diff.seconds <= 60:
                 memberSearch.status = "start"
                 memberSearch.days += 1
                 memberSearch.date = nowdate
