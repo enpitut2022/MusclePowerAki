@@ -16,17 +16,26 @@
       アクティブ人数 :
     <div class="active-number">{{mn}} </div>
     </div>
-    <p>
-      {% for member in ms %}
-      {{member.name}} 
-      ({{member.days}}日)
-      {% endfor %}
-    </p>
-    <p>
-      {% for member in am %}
-      {{member.name}}
-      ({{member.status}})
-      {% endfor %}
-    </p>
+    <div class="flex-user">
+      <div>
+        <p>アクティブメンバー</p>
+        {% for member in ms %}
+        <p>
+        {{member.name}} 
+        ({{member.days}}日)
+        </p>
+        {% endfor %}
+      </div>
+
+      <div>
+        <p>全体のメンバー</p>
+        {% for member in am %}
+        <p>
+        {{member.name}}
+        ({{member.status}})
+        </p>
+        {% endfor %}
+      </div>
+    </div>
   </body>
 </html>
