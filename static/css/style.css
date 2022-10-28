@@ -1,3 +1,10 @@
 .active-number{
     font-size: 50px;
 }
+.flex-user{
+    display: flex;
+}
+.flex-user div{
+    width: 35%;
+    padding: 10px;
+  }
