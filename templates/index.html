@@ -22,5 +22,11 @@
       ({{member.days}}日)
       {% endfor %}
     </p>
+    <p>
+      {% for member in am %}
+      {{member.name}}
+      ({{member.status}})
+      {% endfor %}
+    </p>
   </body>
 </html>

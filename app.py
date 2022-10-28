@@ -22,7 +22,8 @@ class Member(db.Model):
 def index():
     members = Member.query.filter_by(status = "start").all()
     membersNumber = len(members)
-    return render_template('index.html', ms=members, mn = membersNumber)
+    allmember = Member.query.all()
+    return render_template('index.html', ms=members, mn = membersNumber ,am =allmember)
 
 @app.route('/addname', methods=["post"])
 def addname():
@@ -36,12 +37,12 @@ def addname():
         if memberSearch.status == "finish":
             lastdate = memberSearch.date
             diff = nowdate - lastdate
-            # if diff.seconds >= 23*60*60 and diff.seconds <= 25*60*60:
+            # if diff.seconds >= 236060 and diff.seconds <= 256060:
             if diff.seconds >= 30 and diff.seconds <= 60:
                 memberSearch.status = "start"
                 memberSearch.days += 1
                 memberSearch.date = nowdate
-            # elif diff.seconds > 25*60*60:
+            # elif diff.seconds > 256060:
             elif diff.seconds > 60:
                 memberSearch.status = "start"
                 memberSearch.days = 1
