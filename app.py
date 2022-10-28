@@ -8,7 +8,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///muscle.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-now = datetime.datetime.now()
+now = datetime.datetime.utcnow() + datetime.timedelta(hours=9)
 
 # データベースのmemberテーブルの定義
 class Member(db.Model):
@@ -27,27 +27,36 @@ def index():
 
 @app.route('/addname', methods=["post"])
 def addname():
-    nowdate = datetime.datetime.now()
+    nowdate = datetime.datetime.utcnow() + datetime.timedelta(hours=9)
     name = request.form["name"]
     memberSearch = Member.query.filter_by(name = name).first()
     if memberSearch == None:
-        newMember = Member(name=name)
-        db.session.add(newMember)
+        # baseDate = datetime.datetime(2022, 10, 28, 22, 0, 0)
+        # ↓デバッグ用
+        baseDate = datetime.datetime(2022, 10, 28, 17, 30, 30)
+        diff_a = abs(baseDate - nowdate)
+        diff_a_sec = diff_a.seconds % (24 * 60 * 60)
+        if diff_a_sec < 60 * 60 or diff_a_sec >= 23 * 60 * 60:
+            newMember = Member(name=name)
+            db.session.add(newMember)
     else:
         if memberSearch.status == "finish":
             lastdate = memberSearch.date
             diff = nowdate - lastdate
-            # if diff.seconds >= 236060 and diff.seconds <= 256060:
+            # if diff.seconds >= 23 * 60 * 60 and diff.seconds <= 25 * 60 * 60:
+            # ↓デバッグ用
             if diff.seconds >= 30 and diff.seconds <= 60:
                 memberSearch.status = "start"
                 memberSearch.days += 1
                 memberSearch.date = nowdate
-            # elif diff.seconds > 256060:
+            # elif diff.seconds > 25*60*60:
+            # ↓デバッグ用
             elif diff.seconds > 60:
-                memberSearch.status = "start"
-                memberSearch.days = 1
-                memberSearch.date = nowdate
-
+                diff_b_sec = diff.seconds % (24 * 60 * 60)
+                if diff_b_sec < 60 * 60 or diff_b_sec >= 23 * 60 * 60:
+                    memberSearch.status = "start"
+                    memberSearch.days = 1
+                    memberSearch.date = nowdate
     db.session.commit()
     return redirect("/")
 
