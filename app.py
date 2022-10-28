@@ -34,18 +34,19 @@ def addname():
         newMember = Member(name=name)
         db.session.add(newMember)
     else:
-        lastdate = memberSearch.date
-        diff = nowdate - lastdate
-        # if diff.seconds >= 236060 and diff.seconds <= 256060:
-        if diff.seconds >= 30 and diff.seconds <= 60:
-            memberSearch.status = "start"
-            memberSearch.days += 1
-            memberSearch.date = nowdate
-        # elif diff.seconds > 256060:
-        elif diff.seconds > 60:
-            memberSearch.status = "start"
-            memberSearch.days = 1
-            memberSearch.date = nowdate
+        if memberSearch.status == "finish":
+            lastdate = memberSearch.date
+            diff = nowdate - lastdate
+            # if diff.seconds >= 236060 and diff.seconds <= 256060:
+            if diff.seconds >= 30 and diff.seconds <= 60:
+                memberSearch.status = "start"
+                memberSearch.days += 1
+                memberSearch.date = nowdate
+            # elif diff.seconds > 256060:
+            elif diff.seconds > 60:
+                memberSearch.status = "start"
+                memberSearch.days = 1
+                memberSearch.date = nowdate
 
     db.session.commit()
     return redirect("/")
