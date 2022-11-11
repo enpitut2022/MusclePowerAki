@@ -43,5 +43,11 @@
       <textarea name="comment"  rows="3" cols="30" placeholder="コメントを入力" required></textarea>
       <input type="submit" value="投稿">
     </form>
+    {% for comment in cm %}
+      <p>
+        <div>{{ loop.index }}. 名前: {{ comment.name }} 投稿日時: {{ comment.date }}</div>
+        <div>{{ comment.comment }}</div>
+      </p>
+    {% endfor %}
   </body>
 </html>

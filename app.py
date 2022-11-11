@@ -34,8 +34,10 @@ def index():
     membersNumber = len(members)
     # 状態関係なくメンバー全員を取得
     allmember = Member.query.all()
+    # コメントすべてを取得
+    comments = Comment.query.all()
     # index.htmlに値を渡し、表示
-    return render_template('index.html', ms = members, mn = membersNumber, am = allmember)
+    return render_template('index.html', ms = members, mn = membersNumber, am = allmember, cm = comments)
 
 @app.route('/addname', methods=["post"])
 def addname():
