@@ -1,3 +1,4 @@
+import bdb
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 import datetime
@@ -18,6 +19,12 @@ class Member(db.Model):
     status = db.Column(db.String(10), default="start")
     days = db.Column(db.Integer, default=1)
     date = db.Column(db.DateTime)
+
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    date = db.Column(db.DateTime)
+    comment = db.Column(db.String(256))
 
 @app.route('/')
 def index():
@@ -76,6 +83,19 @@ def addname():
                 memberSearch.status = "start"
                 memberSearch.days = 1
                 memberSearch.date = nowdate
+    db.session.commit()
+    return redirect("/")
+
+@app.route('/comment', methods=["post"])
+def addcomment():
+    # 現在時刻の取得
+    nowdate = datetime.datetime.utcnow() + datetime.timedelta(hours=9)
+    dt = nowdate.replace(microsecond = 0)
+    # formで入力された名前(name)を受け取る
+    name = request.form["name"]
+    comment = request.form["comment"]
+    newComment = Comment(name=name, date=dt, comment=comment)
+    db.session.add(newComment)
     db.session.commit()
     return redirect("/")
 
