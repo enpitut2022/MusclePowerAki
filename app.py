@@ -123,8 +123,6 @@ def addcomment():
     db.session.commit()
     return redirect(url_for("detail", id =teamid))
 
-
-
 ## おまじない
 if __name__ == "__main__":
     app.run()
