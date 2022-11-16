@@ -19,6 +19,13 @@ class Member(db.Model):
     days = db.Column(db.Integer, default=1)
     date = db.Column(db.DateTime)
 
+# データベースのcommentテーブルの定義
+class Comment(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(64))
+    date = db.Column(db.DateTime)
+    comment = db.Column(db.String(256))
+
 @app.route('/')
 def index():
     # start状態のメンバー全員を取得
@@ -27,11 +34,13 @@ def index():
     membersNumber = len(members)
     # 状態関係なくメンバー全員を取得
     allmember = Member.query.all()
+    # コメントすべてを取得
+    comments = Comment.query.all()
     # index.htmlに値を渡し、表示
-    return render_template('index.html', ms = members, mn = membersNumber, am = allmember)
+    return render_template('index.html', ms = members, mn = membersNumber, am = allmember, cm = comments)
 
-@app.route('/addname', methods=["post"])
-def addname():
+@app.route('/workstart', methods=["post"])
+def workstart():
     # 現在時刻の取得
     nowdate = datetime.datetime.utcnow() + datetime.timedelta(hours=9)
     ## デバッグ用(1日経過させる)
@@ -76,6 +85,22 @@ def addname():
                 memberSearch.status = "start"
                 memberSearch.days = 1
                 memberSearch.date = nowdate
+    db.session.commit()
+    return redirect("/")
+
+@app.route('/comment', methods=["post"])
+def addcomment():
+    # 現在時刻の取得
+    nowdate = datetime.datetime.utcnow() + datetime.timedelta(hours=9)
+    # 秒の小数点以下切り捨て
+    dt = nowdate.replace(microsecond = 0)
+    # formで入力された名前(name)を受け取る
+    name = request.form["name"]
+    # formで入力されたコメント(comment)を受け取る
+    comment = request.form["comment"]
+    # 新しくコメントを追加
+    newComment = Comment(name=name, date=dt, comment=comment)
+    db.session.add(newComment)
     db.session.commit()
     return redirect("/")
 
