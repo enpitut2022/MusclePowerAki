@@ -42,7 +42,7 @@
     <h2>雑談</h2>
     <p>みんなで盛り上がろう！！！</p>
     <form action="/comment" method="post">
-       <div><input type="text" name="name" placeholder="名前を入力" required></div>
+       <div><input type="text" name="name" placeholder="名前を入力" id="chat_username" required></div>
       <textarea name="comment"  rows="3" cols="30" placeholder="コメントを入力" required></textarea>
       <input type ="hidden" name="teamid" value={{td.id}}>
       <input type="submit" value="投稿">
