@@ -9,8 +9,8 @@
     <h2>{{td.name}}</h2>
     <p>{{td.description}}</p>
     <p><a href="/">戻る</a></p>
-    <form action="/workstart" method="post">
-      <input type="text" name="name" placeholder="名前を入力" required>
+    <form action="/workstart" method="post" onsubmit="save()">
+      <input type="text" name="name" placeholder="名前を入力" id="username" required>
       <input type ="hidden" name="teamid" value={{td.id}}>
       <input type="submit" value="START">
     </form>
@@ -54,4 +54,5 @@
       </p>
     {% endfor %}
   </body>
+  <script src="/static/js/script.js"></script>
 </html>
