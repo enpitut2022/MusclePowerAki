@@ -24,17 +24,16 @@
         {% for member in ms %}
         <p>
         {{member.name}} 
-        ({{member.days}}日)
         </p>
         {% endfor %}
       </div>
 
       <div>
-        <p>全体のメンバー</p>
+        <p>全体のメンバー(継続日数)</p>
         {% for member in am %}
         <p>
         {{member.name}}
-        ({{member.status}})
+        ({{member.days}}日)
         </p>
         {% endfor %}
       </div>
