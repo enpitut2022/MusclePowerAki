@@ -9,8 +9,8 @@
     <h2>{{td.name}}</h2>
     <p>{{td.description}}</p>
     <p><a href="/">戻る</a></p>
-    <form action="/workstart" method="post">
-      <input type="text" name="name" placeholder="名前を入力" required>
+    <form action="/workstart" method="post" onsubmit="save()">
+      <input type="text" name="name" placeholder="名前を入力" id="username" required>
       <input type ="hidden" name="teamid" value={{td.id}}>
       <input type="submit" value="START">
     </form>
@@ -24,17 +24,16 @@
         {% for member in ms %}
         <p>
         {{member.name}} 
-        ({{member.days}}日)
         </p>
         {% endfor %}
       </div>
 
       <div>
-        <p>全体のメンバー</p>
+        <p>全体のメンバー(継続日数)</p>
         {% for member in am %}
         <p>
         {{member.name}}
-        ({{member.status}})
+        ({{member.days}}日)
         </p>
         {% endfor %}
       </div>
@@ -42,7 +41,7 @@
     <h2>雑談</h2>
     <p>みんなで盛り上がろう！！！</p>
     <form action="/comment" method="post">
-       <div><input type="text" name="name" placeholder="名前を入力" required></div>
+       <div><input type="text" name="name" placeholder="名前を入力" id="chat_username" required></div>
       <textarea name="comment"  rows="3" cols="30" placeholder="コメントを入力" required></textarea>
       <input type ="hidden" name="teamid" value={{td.id}}>
       <input type="submit" value="投稿">
@@ -54,4 +53,5 @@
       </p>
     {% endfor %}
   </body>
+  <script src="/static/js/script.js"></script>
 </html>
