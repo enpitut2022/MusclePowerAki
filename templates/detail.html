@@ -12,7 +12,7 @@
           <!--ここからメニュー-->
           <div class="menu-content">
             <div class="memberall">
-              <p>メンバー</p>
+              <p>メンバー(継続日数)</p>
               {% for member in am %}
                 {% if member.status == "start" %}
                   <p><span class="active_user_name">{{member.name}}</span>({{member.days}}日)</p>
