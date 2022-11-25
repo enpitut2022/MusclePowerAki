@@ -5,6 +5,27 @@
     <link rel="stylesheet" href="/static/css/style.css">
   </head>
   <body>
+    <header>
+      <div class="hamburger-menu">
+          <input type="checkbox" id="menu-btn-check">
+          <label for="menu-btn-check" class="menu-btn"><span></span></label>
+          <!--ここからメニュー-->
+          <div class="menu-content">
+              <ul>
+                  <li>
+                      <a href="#">メニューリンク1</a>
+                  </li>
+                  <li>
+                      <a href="#">メニューリンク2</a>
+                  </li>
+                  <li>
+                      <a href="#">メニューリンク3</a>
+                  </li>
+              </ul>
+          </div>
+          <!--ここまでメニュー-->
+      </div>
+  </header>
     <h1>走れ三日坊主</h1>
     <h2>{{td.name}}</h2>
     <p>{{td.description}}</p>
