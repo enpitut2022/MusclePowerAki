@@ -48,7 +48,7 @@ def detail(id):
     # start状態のメンバー数をカウント
     membersNumber = len(members)
     # 状態関係なくメンバー全員を取得
-    allmember = Member.query.filter_by(teamid = id).all()
+    allmember = Member.query.filter_by(teamid = id).order_by(Member.days.desc()).all()
     # コメントすべてを取得
     comments = Comment.query.filter_by(teamid = id).all()
     # index.htmlに値を渡し、表示

@@ -61,7 +61,7 @@ body {
     justify-content: center;
     align-items: center;
     z-index: 90;
-    background-color: #3584bb;
+    background-color: #BBBBBB;
 }
 .menu-btn span,
 .menu-btn span:before,
@@ -94,4 +94,9 @@ body {
 
 .active_user_name {
     color: #00cc00;
+}
+
+.submit_button {
+    height:60px;
+    width: 100%;
 }

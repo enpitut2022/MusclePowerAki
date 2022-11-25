@@ -12,7 +12,7 @@
           <!--ここからメニュー-->
           <div class="menu-content">
             <div class="memberall">
-              <p>メンバー一覧</p>
+              <p>メンバー</p>
               {% for member in am %}
                 {% if member.status == "start" %}
                   <p><span class="active_user_name">{{member.name}}</span>({{member.days}}日)</p>
@@ -30,9 +30,9 @@
     <p>{{td.description}}</p>
     <p><a href="/">戻る</a></p>
     <form action="/workstart" method="post" onsubmit="save()">
-      <input type="text" name="name" placeholder="名前を入力" id="username" required>
+      <div><input type="text" name="name" placeholder="名前を入力" id="username" required></div>
       <input type ="hidden" name="teamid" value={{td.id}}>
-      <input type="submit" value="START">
+      <p><input type="submit" value="START" class="submit_button"></p>
     </form>
     <div>
       アクティブ人数 :
