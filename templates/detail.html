@@ -37,26 +37,6 @@
       アクティブ人数 :
     <div class="active-number">{{mn}} </div>
     </div>
-    <div class="flex-user">
-      <div>
-        <p>アクティブメンバー</p>
-        {% for member in ms %}
-        <p>
-        {{member.name}} 
-        </p>
-        {% endfor %}
-      </div>
-
-      <div>
-        <p>全体のメンバー(継続日数)</p>
-        {% for member in am %}
-        <p>
-        {{member.name}}
-        ({{member.days}}日)
-        </p>
-        {% endfor %}
-      </div>
-    </div>
     <h2>雑談</h2>
     <p>みんなで盛り上がろう！！！</p>
     <form action="/comment" method="post">

@@ -20,7 +20,7 @@ body {
     top: 0;
     left: 100%;/*leftの値を変更してメニューを画面外へ*/
     z-index: 80;
-    background-color: #3584bb;
+    background-color: #828e98;
     transition: all 0.5s;
 }
 .menu-content ul {
