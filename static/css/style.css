@@ -81,9 +81,13 @@ body {
     top: 8px;
 }
 #menu-btn-check:checked ~ .menu-content {
-    left: 0;/*メニューを画面内へ*/
+    left: 60%;/*メニューを画面内へ*/
 }
 
 #menu-btn-check {
     display: none;
+}
+
+.memberall {
+    margin-top: 70px;
 }

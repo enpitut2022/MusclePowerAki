@@ -11,6 +11,7 @@
           <label for="menu-btn-check" class="menu-btn"><span></span></label>
           <!--ここからメニュー-->
           <div class="menu-content">
+            <div class="memberall">
               <p>メンバー一覧</p>
               {% for member in am %}
               <p>
@@ -18,6 +19,7 @@
               ({{member.days}}日)
               </p>
               {% endfor %}
+            </div>
           </div>
           <!--ここまでメニュー-->
       </div>
