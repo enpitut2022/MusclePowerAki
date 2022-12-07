@@ -17,8 +17,11 @@ class Member(db.Model):
     name = db.Column(db.String(64))
     status = db.Column(db.String(10), default="start")
     days = db.Column(db.Integer, default=1)
+    max_days = db.Column(db.Integer, defalut=1)
     date = db.Column(db.DateTime)
     teamid = db.Column(db.Integer)
+    goal = db.Column(db.String(150))
+    training_detail = db.Column(db.String(150))
 
 # データベースのcommentテーブルの定義
 class Comment(db.Model):
