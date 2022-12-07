@@ -123,6 +123,11 @@ def addcomment():
     db.session.commit()
     return redirect(url_for("detail", id =teamid))
 
+@app.route('/profile/<int:id>')
+def profile(id):
+    member_data = Member.query.get(id)
+    return render_template('profile.html', member = member_data)
+
 ## おまじない
 if __name__ == "__main__":
     app.run()
