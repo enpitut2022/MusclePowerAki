@@ -7,5 +7,12 @@
   <body>
     <h1>走れ三日坊主</h1>
     <p>{{ member.name }}</p>
+    <h2>編集</h2>
+    <form action="/profile_edit" method="post">
+      <div><input type="text" name="goal" placeholder="目標を入力" required></div>
+     <textarea name="training_detail"  rows="3" cols="30" placeholder="運動内容を入力" required></textarea>
+     <input type ="hidden" name="user_id" value={{member.id}}>
+     <input type="submit" value="投稿">
+   </form>
   </body>
 </html>
