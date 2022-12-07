@@ -9,6 +9,7 @@
     <p>{{ member.name }}</p>
     <p>{{ member.goal }}</p>
     <p>{{ member.training_detail }}</p>
+    <a href="/detail/{{ member.teamid }}">戻る</a>
     <h2>編集</h2>
     <form action="/profile_edit" method="post">
       <div><input type="text" name="goal" placeholder="目標を入力" required></div>
