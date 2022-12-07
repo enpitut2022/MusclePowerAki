@@ -5,38 +5,38 @@
     <link rel="stylesheet" href="/static/css/style.css">
   </head>
   <body>
+    <header>
+      <div class="hamburger-menu">
+          <input type="checkbox" id="menu-btn-check">
+          <label for="menu-btn-check" class="menu-btn"><span></span></label>
+          <!--ここからメニュー-->
+          <div class="menu-content">
+            <div class="memberall">
+              <p>メンバー(継続日数)</p>
+              {% for member in am %}
+                {% if member.status == "start" %}
+                  <p><span class="active_user_name">{{member.name}}</span>({{member.days}}日)</p>
+                {% else %}
+                  <p>{{member.name}}({{member.days}}日)</p>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+          <!--ここまでメニュー-->
+      </div>
+  </header>
     <h1>走れ三日坊主</h1>
     <h2>{{td.name}}</h2>
     <p>{{td.description}}</p>
     <p><a href="/">戻る</a></p>
     <form action="/workstart" method="post" onsubmit="save()">
-      <input type="text" name="name" placeholder="名前を入力" id="username" required>
+      <div><input type="text" name="name" placeholder="名前を入力" id="username" required></div>
       <input type ="hidden" name="teamid" value={{td.id}}>
-      <input type="submit" value="START">
+      <p><input type="submit" value="START" class="submit_button"></p>
     </form>
     <div>
       アクティブ人数 :
     <div class="active-number">{{mn}} </div>
-    </div>
-    <div class="flex-user">
-      <div>
-        <p>アクティブメンバー</p>
-        {% for member in ms %}
-        <p>
-        {{member.name}} 
-        </p>
-        {% endfor %}
-      </div>
-
-      <div>
-        <p>全体のメンバー(継続日数)</p>
-        {% for member in am %}
-        <p>
-        {{member.name}}
-        ({{member.days}}日)
-        </p>
-        {% endfor %}
-      </div>
     </div>
     <h2>雑談</h2>
     <p>みんなで盛り上がろう！！！</p>
