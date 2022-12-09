@@ -100,6 +100,8 @@ def workstart():
                     memberSearch.status = "start"
                     memberSearch.days += 1
                     memberSearch.date = nowdate
+                    if (memberSearch.days > memberSearch.max_days):
+                        memberSearch.max_days = memberSearch.days
                 # diffの範囲が設定された時間の前後1時間に収まり、かつ最後に運動した日から2日以上経過しているとき
                 elif (diff.seconds <= 60 * 60 and diff.days >= 2) or (diff.seconds >= 23 * 60 * 60 and diff.days >= 1):
                     # そのMemberをstart状態にして連続日数を初期化し、最終運動日時を更新する
