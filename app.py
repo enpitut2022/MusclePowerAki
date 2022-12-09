@@ -123,9 +123,9 @@ def addcomment():
     # formで入力されたコメント(comment)を受け取る
     if (request.form["comment"] != ""):
         comment = request.form["comment"]
-    # 新しくコメントを追加
-    newComment = Comment(name=name, date=dt, comment=comment, teamid=teamid)
-    db.session.add(newComment)
+        # 新しくコメントを追加
+        newComment = Comment(name=name, date=dt, comment=comment, teamid=teamid)
+        db.session.add(newComment)
     db.session.commit()
     return redirect(url_for("detail", id =teamid))
 
