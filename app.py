@@ -137,8 +137,10 @@ def profile_edit():
     goal = request.form["goal"]
     training_detail = request.form["training_detail"]
     member_data = Member.query.get(id)
-    member_data.goal = goal
-    member_data.training_detail = training_detail
+    if (goal != ""):
+        member_data.goal = goal
+    if (training_detail != ""):
+        member_data.training_detail = training_detail
     db.session.commit()
     return redirect(url_for("profile", id =id))
 
