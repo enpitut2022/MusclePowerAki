@@ -56,7 +56,7 @@
     </form>
     {% for comment in cm %}
       <p>
-        <div>{{ loop.index }}. 名前: {{ comment.name }} 投稿日時: {{ comment.date }}</div>
+        <div>{{ loop.revindex }}. 名前: {{ comment.name }} 投稿日時: {{ comment.date }}</div>
         <div>{{ comment.comment }}</div>
       </p>
     {% endfor %}
