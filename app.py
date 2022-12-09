@@ -121,7 +121,8 @@ def addcomment():
     # formで入力された名前(name)を受け取る
     name = request.form["name"]
     # formで入力されたコメント(comment)を受け取る
-    comment = request.form["comment"]
+    if (request.form["comment"] != ""):
+        comment = request.form["comment"]
     # 新しくコメントを追加
     newComment = Comment(name=name, date=dt, comment=comment, teamid=teamid)
     db.session.add(newComment)
