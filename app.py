@@ -64,25 +64,31 @@ def workstart():
     nowdate = datetime.datetime.utcnow() + datetime.timedelta(hours=9)
     ## デバッグ用(1日経過させる)
     ## nowdate = datetime.datetime.utcnow() + datetime.timedelta(hours=9) + datetime.timedelta(days = 1)
+    # 分以下を補正
+    nowdate_rep = nowdate.replace(minute=0, second=0, microsecond=0)
+    # 基準となる時刻
+    teamsearch = Team.query.filter_by(id = teamid).first()
+    baseDate = teamsearch.date
+    # 基準となる時刻との差分を取る
+    diff_rep = nowdate_rep - baseDate
+    # 差分が23時間だった場合
+    if diff_rep.seconds == 23 * 60 * 60:
+        # 1時間加える
+        nowdate_rep = nowdate_rep + datetime.timedelta(hours = 1)
     # formで入力された名前(name)を受け取る
     name = request.form["name"]
     # 入力された名前をDBから検索
     memberSearch = Member.query.filter_by(name = name).first()
     # DBに名前がなかった場合
     if memberSearch == None:
-        # 基準となる時刻
-        teamsearch = Team.query.filter_by(id = teamid).first()
-        baseDate = teamsearch.date
-        ## ↓デバッグ用(デモの日時)
-        ## baseDate = datetime.datetime(2022, 10, 28, 12, 30, 0)
         # 基準となる時刻と現在時刻の差を取る(絶対値)
-        diff_a = abs(baseDate - nowdate)
+        diff_dn = abs(baseDate - nowdate)
         # その差の秒数
-        diff_a_sec = diff_a.seconds
+        diff_dn_sec = diff_dn.seconds
         # 秒数が1時間未満または23時間以上なら設定された日時の前後1時間以内とみなす
-        if diff_a_sec < 60 * 60 or diff_a_sec >= 23 * 60 * 60:
+        if diff_dn_sec < 60 * 60 or diff_dn_sec >= 23 * 60 * 60:
             # 新しくメンバーを追加
-            newMember = Member(name=name, date=nowdate, teamid=teamid)
+            newMember = Member(name=name, date=nowdate_rep, teamid=teamid)
             db.session.add(newMember)
     # DBに名前があった場合
     else:
@@ -92,22 +98,23 @@ def workstart():
                 # その名前のメンバーの最終運動日時を取得
                 lastdate = memberSearch.date
                 # 現在時刻と最終運動日時を比較
-                diff = nowdate - lastdate
+                diff_nl = nowdate_rep - lastdate
                 # 1日と1時間(25時間以内)もしくは0日と23時間の範囲にdiffが収まったとき
                 # すなわち、最後に運動した日の翌日に運動するとき
-                if (diff.seconds <= 60 * 60 and diff.days == 1) or (diff.seconds >= 23 * 60 * 60 and diff.days == 0):
+                if (diff_nl.seconds < 60 * 60 and diff_nl.days == 1) or (diff_nl.seconds >= 23 * 60 * 60 and diff_nl.days == 0):
                     # そのMemberをstart状態にして連続日数を1追加し、最終運動日時を更新する
                     memberSearch.status = "start"
                     memberSearch.days += 1
-                    memberSearch.date = nowdate
+                    memberSearch.date = nowdate_rep
+                    # 最大継続日数の更新
                     if (memberSearch.days > memberSearch.max_days):
                         memberSearch.max_days = memberSearch.days
                 # diffの範囲が設定された時間の前後1時間に収まり、かつ最後に運動した日から2日以上経過しているとき
-                elif (diff.seconds <= 60 * 60 and diff.days >= 2) or (diff.seconds >= 23 * 60 * 60 and diff.days >= 1):
+                elif (diff_nl.seconds <= 60 * 60 and diff_nl.days >= 2) or (diff_nl.seconds >= 23 * 60 * 60 and diff_nl.days >= 1):
                     # そのMemberをstart状態にして連続日数を初期化し、最終運動日時を更新する
                     memberSearch.status = "start"
                     memberSearch.days = 1
-                    memberSearch.date = nowdate
+                    memberSearch.date = nowdate_rep
     db.session.commit()
     return redirect(url_for("detail",id =teamid))
 
@@ -131,6 +138,7 @@ def addcomment():
 
 @app.route('/profile/<int:id>')
 def profile(id):
+    # プロフィールの表示
     member_data = Member.query.get(id)
     return render_template('profile.html', member = member_data)
 
@@ -140,8 +148,10 @@ def profile_edit():
     goal = request.form["goal"]
     training_detail = request.form["training_detail"]
     member_data = Member.query.get(id)
+    # 目標に値が入力されていたら、更新する
     if (goal != ""):
         member_data.goal = goal
+    # 運動内容に値が入力されていたら、更新する
     if (training_detail != ""):
         member_data.training_detail = training_detail
     db.session.commit()
