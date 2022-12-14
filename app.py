@@ -164,6 +164,24 @@ def allcomment(id):
     comments = Comment.query.filter_by(teamid = id).order_by(Comment.id.desc()).all()
     return render_template('comment.html', td = teamdata, cm = comments)
 
+@app.route('/comment_detail', methods=["post"])
+def add_allcomment():
+    teamid = int(request.form["teamid"])
+    # 現在時刻の取得
+    nowdate = datetime.datetime.utcnow() + datetime.timedelta(hours=9)
+    # 秒の小数点以下切り捨て
+    dt = nowdate.replace(microsecond = 0)
+    # formで入力された名前(name)を受け取る
+    name = request.form["name"]
+    # formで入力されたコメント(comment)を受け取る
+    if (request.form["comment"] != ""):
+        comment = request.form["comment"]
+        # 新しくコメントを追加
+        newComment = Comment(name=name, date=dt, comment=comment, teamid=teamid)
+        db.session.add(newComment)
+    db.session.commit()
+    return redirect(url_for("allcomment", id =teamid))
+
 ## おまじない
 if __name__ == "__main__":
     app.run()
