@@ -53,7 +53,8 @@ def detail(id):
     # 状態関係なくメンバー全員を取得
     allmember = Member.query.filter_by(teamid = id).order_by(Member.days.desc()).all()
     # コメントすべてを取得
-    comments = Comment.query.filter_by(teamid = id).order_by(Comment.id.desc()).all()
+    nowdate = (datetime.datetime.utcnow() + datetime.timedelta(hours=9)).date()
+    comments = Comment.query.filter_by(teamid = id).filter(Comment.date.contains(nowdate)).order_by(Comment.id.desc()).all()
     # index.htmlに値を渡し、表示
     return render_template('detail.html',td = teamdata, ms = members, mn = membersNumber, am = allmember, cm = comments)
 
