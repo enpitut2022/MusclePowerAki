@@ -61,7 +61,7 @@
     {% for comment in cm %}
       <p>
         <div>{{ loop.revindex }}. 名前: {{ comment.name }} 投稿日時: {{ comment.date }}</div>
-        <div>{{ comment.comment }}</div>
+        <div class="comment">{{ comment.comment }}</div>
       </p>
     {% endfor %}
   </body>

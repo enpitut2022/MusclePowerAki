@@ -101,3 +101,7 @@ body {
     height:60px;
     width: 250px;
 }
+
+.comment {
+    white-space: pre-wrap;
+}
