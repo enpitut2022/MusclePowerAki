@@ -58,6 +58,7 @@
         <input type ="hidden" name="teamid" value={{td.id}}>
         <input type="submit" value="投稿">
     </form>
+    <a href="/allcomment/{{td.id}}">全てのコメント 入力フォームはこちら</a>
     {% for comment in cm %}
       <p>
         <div>{{ loop.revindex }}. 名前: {{ comment.name }} 投稿日時: {{ comment.date }}</div>

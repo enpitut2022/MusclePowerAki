@@ -158,6 +158,12 @@ def profile_edit():
     db.session.commit()
     return redirect(url_for("profile", id =id))
 
+@app.route('/allcomment/<int:id>')
+def allcomment(id):
+    teamdata = Team.query.get(id)
+    comments = Comment.query.filter_by(teamid = id).order_by(Comment.id.desc()).all()
+    return render_template('comment.html', td = teamdata, cm = comments)
+
 ## おまじない
 if __name__ == "__main__":
     app.run()
