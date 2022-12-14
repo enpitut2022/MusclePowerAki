@@ -50,15 +50,14 @@
     <p>みんなで盛り上がろう！！！</p>
     <form action="/comment" method="post">
         <div><input type="text" name="name" placeholder="名前を入力" id="chat_username" required></div>
+        <h3>かんたんコメントボタン</h3>
         <p>
           <button type="submit" name="comment" value="こんにちは！">こんにちは！</button>
           <button type="submit" name="comment" value="これから運動やります">これから運動やります</button>
         </p>
-        <textarea name="comment"  rows="3" cols="30" placeholder="コメントを入力"></textarea>
         <input type ="hidden" name="teamid" value={{td.id}}>
-        <input type="submit" value="投稿">
     </form>
-    <a href="/allcomment/{{td.id}}">全てのコメント 入力フォームはこちら</a>
+    <a href="/allcomment/{{td.id}}">全てのコメント、入力フォームはこちら</a>
     {% for comment in cm %}
       <p>
         <div>{{ loop.revindex }}. 名前: {{ comment.name }} 投稿日時: {{ comment.date }}</div>
@@ -67,4 +66,9 @@
     {% endfor %}
   </body>
   <script src="/static/js/script.js"></script>
+  <script>
+    setTimeout(function () {
+      location.reload();
+    }, 10000);
+  </script>
 </html>
