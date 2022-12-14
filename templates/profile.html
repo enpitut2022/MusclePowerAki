@@ -6,7 +6,7 @@
   </head>
   <body>
     <h1>走れ三日坊主</h1>
-    <h2>{{ member.name }}さんのプロフィール</h2>
+    <h2><span id="profile_username">{{ member.name }}</span>さんのプロフィール</h2>
     <h3>継続日数</h3>
     <p>現在: {{ member.days }}日</p>
     <p>最大: {{ member.max_days }}日</p>
@@ -15,12 +15,16 @@
     <h3>運動内容</h3>
     <p>{{ member.training_detail }}</p>
     <a href="/detail/{{ member.teamid }}">戻る</a>
-    <h2>編集</h2>
-    <form action="/profile_edit" method="post">
-     <textarea name="goal"  rows="3" cols="30" placeholder="目標を入力"></textarea>
-     <textarea name="training_detail"  rows="3" cols="30" placeholder="運動内容を入力"></textarea>
-     <input type ="hidden" name="user_id" value={{member.id}}>
-     <input type="submit" value="更新">
-   </form>
+
+    <div id="edit_profile">
+      <h2>編集</h2>
+      <form action="/profile_edit" method="post">
+      <textarea name="goal"  rows="3" cols="30" placeholder="目標を入力"></textarea>
+      <textarea name="training_detail"  rows="3" cols="30" placeholder="運動内容を入力"></textarea>
+      <input type ="hidden" name="user_id" value={{member.id}}>
+      <input type="submit" value="更新">
+    </form>
+    </div>
   </body>
+  <script src="/static/js/profile.js"></script>
 </html>
