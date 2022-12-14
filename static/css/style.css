@@ -68,7 +68,7 @@ button.btn {
   line-height: 1.5;
   position: relative;
   display: inline-block;
-  padding: 1rem 4rem;
+  padding: 1rem 1rem;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -86,26 +86,25 @@ button.btn {
 
 .btn--yellow {
   color: #000;
-  background-color: #fff100;
-  border-bottom: 5px solid #ccc100;
-  position: fixed;
+  background-color: #25a8e6;
+  position: absolute;
   top: 10px;
   right: 10px;
   display: flex;
   height: 30px; 
-  width: 60px;
+  left: 60%;
   justify-content: center;
   align-items: center;
   z-index: 90;
   font-size: 7px;
 }
 
-.btn--yellow:hover {
+/* .btn--yellow:hover {
   margin-top: 3px;
   color: #000;
   background: #fff20a;
   border-bottom: 2px solid #ccc100;
-}
+} */
 
 .menu-btn {
     position: fixed;
@@ -145,7 +144,7 @@ button.btn {
 }
 
 .memberall {
-    margin-top: 70px;
+    margin-top: 90px;
 }
 
 .active_user_name {
