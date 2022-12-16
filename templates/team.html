@@ -7,14 +7,21 @@
   <body>
     <h1>走れ三日坊主</h1>
     <h2>グループ一覧</h2>
-    {% for  team in tm %}
+    <p>はじめまして！</p>
+    <p>まず最初に、グループを選択してください。</p>
+    <p>グループ選択後、最初の画面に戻るので、もう一度STARTを押してください。</p>
+    {% for team in tm %}
     <p>
         <a href="/detail/{{team.id}}">{{team.name}}</a>
     </p>
     {% endfor %}
     <form action="/teamchoice" method="post">
       {% for team in td %}
-        <input type="radio" value="{{team.id}}" name="teamid">{{team.name}}
+        {% if loop.first %}
+          <p><label><input type="radio" value="{{team.id}}" name="teamid" checked>{{team.name}}</label></p>
+        {% else %}
+          <p><label><input type="radio" value="{{team.id}}" name="teamid">{{team.name}}</label></p>
+        {% endif %}
       {% endfor %}
       <input type ="hidden" name="username" value={{username}}>
       <input type="submit" value="決定">
