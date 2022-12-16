@@ -12,6 +12,13 @@
         <a href="/detail/{{team.id}}">{{team.name}}</a>
     </p>
     {% endfor %}
+    <form action="/teamchoice" method="post">
+      {% for team in td %}
+        <input type="radio" value="{{team.id}}" name="teamid">{{team.name}}
+      {% endfor %}
+      <input type ="hidden" name="username" value={{username}}>
+      <input type="submit" value="決定">
+    </form>
   </body>
   <script src="/static/js/script.js"></script>
 </html>

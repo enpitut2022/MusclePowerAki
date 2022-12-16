@@ -48,7 +48,21 @@ def name_submit():
     memberSearch = Member.query.filter_by(name = username).first()
     if (memberSearch == None):
         teamdata = Team.query.all()
-        return render_template('team.html', td = teamdata)
+        return render_template('team.html', td = teamdata, username = username)
+
+@app.route('/teamchoice', methods=['post'])
+def teamchoice():
+    username = request.form['username']
+    teamid = int(request.form['teamid'])
+
+    teamsearch = Team.query.get(teamid)
+    baseDate = teamsearch.date
+    newMember = Member(name=username, date=baseDate, teamid=teamid)
+    db.session.add(newMember)
+    db.session.commit()
+    return redirect('/')
+
+
 
 @app.route('/detail/<int:id>')
 def detail(id):
