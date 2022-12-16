@@ -40,8 +40,15 @@ class Team(db.Model):
 
 @app.route('/')
 def index():
-    team = Team.query.all()
-    return render_template('index.html', tm =team)
+    return render_template('index.html')
+
+@app.route('/name_submit', methods=['post'])
+def name_submit():
+    username = request.form['name']
+    memberSearch = Member.query.filter_by(name = username).first()
+    if (memberSearch == None):
+        teamdata = Team.query.all()
+        return render_template('team.html', td = teamdata)
 
 @app.route('/detail/<int:id>')
 def detail(id):
