@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>走れ三日坊主</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="/static/css/style.css">
+  </head>
+  <body>
+    <h1>走れ三日坊主</h1>
+    <h2>{{td.name}}</h2>
+    <p><a href="/detail/{{td.id}}">戻る</a></p>
+
+    <h2>全てのコメント</h2>
+    <p>みんなで盛り上がろう！！！</p>
+    <form action="/comment_detail" method="post">
+        <div><input type="text" name="name" placeholder="名前を入力" id="chat_username" required></div>
+        <p>
+          <button type="submit" name="comment" value="こんにちは！">こんにちは！</button>
+          <button type="submit" name="comment" value="これから運動やります">これから運動やります</button>
+        </p>
+        <textarea name="comment"  rows="3" cols="30" placeholder="コメントを入力"></textarea>
+        <input type ="hidden" name="teamid" value={{td.id}}>
+        <input type="submit" value="投稿">
+    </form>
+    {% for comment in cm %}
+      <p>
+        <div>{{ loop.revindex }}. 名前: {{ comment.name }} 投稿日時: {{ comment.date }}</div>
+        <div class="comment">{{ comment.comment }}</div>
+      </p>
+    {% endfor %}
+  </body>
+  <script src="/static/js/comment.js"></script>
+</html>

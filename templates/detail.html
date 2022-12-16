@@ -6,9 +6,9 @@
   </head>
   <body>
     <header>
-      <div class="hamburger-menu">
+      <div class="yellow-button">
           <input type="checkbox" id="menu-btn-check">
-          <label for="menu-btn-check" class="menu-btn"><span></span></label>
+          <label for="menu-btn-check" class="btn btn--yellow btn--cubic">メンバーリスト<span></span></label>
           <!--ここからメニュー-->
           <div class="menu-content">
             <div class="memberall">
@@ -38,20 +38,37 @@
       アクティブ人数 :
     <div class="active-number">{{mn}} </div>
     </div>
-    <h2>雑談</h2>
+
+    <table border="1">
+      <tr><th>名前</th><th>運動内容</th></tr>
+      {% for member in ms %}
+        <tr><td>{{member.name}}</td><td>{{member.training_detail}}</td></tr>
+      {% endfor %}
+    </table>
+
+    <h2>新着コメント</h2>
     <p>みんなで盛り上がろう！！！</p>
     <form action="/comment" method="post">
-       <div><input type="text" name="name" placeholder="名前を入力" id="chat_username" required></div>
-      <textarea name="comment"  rows="3" cols="30" placeholder="コメントを入力" required></textarea>
-      <input type ="hidden" name="teamid" value={{td.id}}>
-      <input type="submit" value="投稿">
+        <div><input type="text" name="name" placeholder="名前を入力" id="chat_username" required></div>
+        <h3>かんたんコメントボタン</h3>
+        <p>
+          <button type="submit" name="comment" value="こんにちは！">こんにちは！</button>
+          <button type="submit" name="comment" value="これから運動やります">これから運動やります</button>
+        </p>
+        <input type ="hidden" name="teamid" value={{td.id}}>
     </form>
+    <a href="/allcomment/{{td.id}}">全てのコメント、入力フォームはこちら</a>
     {% for comment in cm %}
       <p>
-        <div>{{ loop.index }}. 名前: {{ comment.name }} 投稿日時: {{ comment.date }}</div>
-        <div>{{ comment.comment }}</div>
+        <div>{{ loop.revindex }}. 名前: {{ comment.name }} 投稿日時: {{ comment.date }}</div>
+        <div class="comment">{{ comment.comment }}</div>
       </p>
     {% endfor %}
   </body>
   <script src="/static/js/script.js"></script>
+  <script>
+    setTimeout(function () {
+      location.reload();
+    }, 10000);
+  </script>
 </html>
