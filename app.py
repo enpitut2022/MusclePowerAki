@@ -96,13 +96,15 @@ def name_submit():
 @app.route('/teamchoice', methods=['post'])
 def teamchoice():
     username = request.form['username']
-    teamid = int(request.form['teamid'])
-
-    teamsearch = Team.query.get(teamid)
-    baseDate = teamsearch.date
-    newMember = Member(name=username, date=baseDate, teamid=teamid)
-    db.session.add(newMember)
-    db.session.commit()
+    # ここでusernameと一致するメンバーをもう一度検索しないと、Fumioが大量発生してしまう！
+    memberSearch = Member.query.filter_by(name = username).first()
+    if memberSearch == None:
+        teamid = int(request.form['teamid'])
+        teamsearch = Team.query.get(teamid)
+        baseDate = teamsearch.date
+        newMember = Member(name=username, date=baseDate, teamid=teamid)
+        db.session.add(newMember)
+        db.session.commit()
     return redirect('/')
 
 @app.route('/detail/<int:id>')
