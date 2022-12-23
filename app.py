@@ -105,7 +105,9 @@ def teamchoice():
         newMember = Member(name=username, date=baseDate, teamid=teamid)
         db.session.add(newMember)
         db.session.commit()
-    return redirect('/')
+    member_data = Member.query.filter_by(name=username).first()
+    team_data = Team.query.get(member_data.teamid)
+    return render_template('team_decide.html', un=username, td=team_data)
 
 @app.route('/detail/<int:id>')
 def detail(id):

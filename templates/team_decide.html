@@ -1,0 +1,16 @@
+<html>
+  <head>
+    <title>走れ三日坊主</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="/static/css/style.css">
+  </head>
+  <body>
+    <h1>走れ三日坊主</h1>
+    <p>{{un}}さんは{{td.name}}に加入しました！</p>
+    <p>早速運動を開始しましょう！</p>
+    <form action="/name_submit" method="post">
+        <input type="hidden" name="name" value="{{un}}">
+        <p><input type="submit" value="START" class="submit_button"></p>
+    </form>
+  </body>
+</html>
