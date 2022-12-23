@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 
 app = Flask(__name__)
-app.secret_key = b'icecream2022'
+app.secret_key = 'abcdefghijklmn'
 
 # DBのURI
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///muscle.db'
