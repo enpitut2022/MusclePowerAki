@@ -17,7 +17,7 @@
                 {% if member.status == "start" %}
                   <p><a href="/profile/{{member.id}}"><span class="active_user_name">{{member.name}}</span></a>({{member.days}}日)</p>
                 {% else %}
-                  <p><a href="/profile/{{member.id}}">{{member.name}}</a>({{member.days}}日)</p>
+                <p><a href="/profile/{{member.id}}"><span class="nonactive_user_name">{{member.name}}</span></a>({{member.days}}日)</p>
                 {% endif %}
               {% endfor %}
             </div>

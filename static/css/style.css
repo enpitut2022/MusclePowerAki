@@ -149,6 +149,20 @@ button.btn {
 
 .active_user_name {
     color: #00cc00;
+    display: inline-block;
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nonactive_user_name {
+    color: #000000;
+    display: inline-block;
+    width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .submit_button {
