@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 import datetime
 
 app = Flask(__name__)
+app.secret_key = b'icecream2022'
 
 # DBのURI
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///muscle.db'
@@ -83,13 +84,16 @@ def name_submit():
                 # 最大継続日数の更新
                 if (memberSearch.days > memberSearch.max_days):
                     memberSearch.max_days = memberSearch.days
+                flash('運動を開始しました！めっちゃ偉い！', 'ok')
             # diffの範囲が設定された時間の前後1時間に収まり、かつ最後に運動した日から2日以上経過しているとき
             elif (diff_nl.seconds <= 60 * 60 and diff_nl.days >= 2) or (diff_nl.seconds >= 23 * 60 * 60 and diff_nl.days >= 1):
                 # そのMemberをstart状態にして連続日数を初期化し、最終運動日時を更新する
                 memberSearch.status = "start"
                 memberSearch.days = 1
                 memberSearch.date = nowdate_rep
-                
+                flash('運動を開始しました！偉い！', 'ok')
+            else:
+                flash('グループの運動時間外です！決められた時間内に運動しましょう！', 'ng')
         db.session.commit()
         return redirect(url_for("detail",id =teamid))
 

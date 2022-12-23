@@ -173,3 +173,13 @@ button.btn {
 .comment {
     white-space: pre-wrap;
 }
+
+.ng{
+    color:red;
+    font-size: 30px;
+}
+
+.ok{
+    color:green;
+    font-size: 20px;
+}

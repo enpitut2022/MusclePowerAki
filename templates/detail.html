@@ -29,6 +29,13 @@
     <h2>{{td.name}}</h2>
     <p>{{td.description}}</p>
     <p><a href="/">戻る</a></p>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+        {% endif %}
+    {% endwith %}
     <div>
       アクティブ人数 :
     <div class="active-number">{{mn}} </div>
@@ -65,6 +72,6 @@
   <script>
     setTimeout(function () {
       location.reload();
-    }, 10000);
+    }, 15000);
   </script>
 </html>
