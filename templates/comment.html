@@ -11,8 +11,8 @@
 
     <h2>全てのコメント</h2>
     <p>みんなで盛り上がろう！！！</p>
-    <form action="/comment_detail" method="post">
-        <div><input type="text" name="name" placeholder="名前を入力" id="chat_username" required></div>
+    <form action="/comment_detail" method="post" onsubmit="nameinput()">
+        <div><input type="hidden" name="name" id="comment_username"></div>
         <p>
           <button type="submit" name="comment" value="こんにちは！">こんにちは！</button>
           <button type="submit" name="comment" value="これから運動やります">これから運動やります</button>

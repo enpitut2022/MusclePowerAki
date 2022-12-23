@@ -17,7 +17,7 @@
                 {% if member.status == "start" %}
                   <p><a href="/profile/{{member.id}}"><span class="active_user_name">{{member.name}}</span></a>({{member.days}}日)</p>
                 {% else %}
-                  <p><a href="/profile/{{member.id}}">{{member.name}}</a>({{member.days}}日)</p>
+                <p><a href="/profile/{{member.id}}"><span class="nonactive_user_name">{{member.name}}</span></a>({{member.days}}日)</p>
                 {% endif %}
               {% endfor %}
             </div>
@@ -29,11 +29,6 @@
     <h2>{{td.name}}</h2>
     <p>{{td.description}}</p>
     <p><a href="/">戻る</a></p>
-    <form action="/workstart" method="post" onsubmit="save()">
-      <div><input type="text" name="name" placeholder="名前を入力" id="username" required></div>
-      <input type ="hidden" name="teamid" value={{td.id}}>
-      <p><input type="submit" value="START" class="submit_button"></p>
-    </form>
     <div>
       アクティブ人数 :
     <div class="active-number">{{mn}} </div>
@@ -48,8 +43,8 @@
 
     <h2>新着コメント</h2>
     <p>みんなで盛り上がろう！！！</p>
-    <form action="/comment" method="post">
-        <div><input type="text" name="name" placeholder="名前を入力" id="chat_username" required></div>
+    <form action="/comment" method="post" onsubmit="nameinput()">
+        <div><input type="hidden" name="name" id="comment_username"></div>
         <h3>かんたんコメントボタン</h3>
         <p>
           <button type="submit" name="comment" value="こんにちは！">こんにちは！</button>
@@ -66,6 +61,7 @@
     {% endfor %}
   </body>
   <script src="/static/js/script.js"></script>
+  <script src="/static/js/comment.js"></script>
   <script>
     setTimeout(function () {
       location.reload();

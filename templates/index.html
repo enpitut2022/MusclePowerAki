@@ -6,12 +6,12 @@
   </head>
   <body>
     <h1>走れ三日坊主</h1>
-    <h2>グループ一覧</h2>
-    {% for  team in tm %}
-    <p>
-        <a href="/detail/{{team.id}}">{{team.name}}</a>
-    </p>
-    {% endfor %}
+    <p>ようこそ！</p>
+    <p>名前を入力して運動を開始しましょう！</p>
+    <form action="/name_submit" method="post" onsubmit="save()">
+        <div><input type="text" name="name" placeholder="名前を入力" id="username" required></div>
+        <p><input type="submit" value="START" class="submit_button"></p>
+    </form>
   </body>
   <script src="/static/js/script.js"></script>
 </html>

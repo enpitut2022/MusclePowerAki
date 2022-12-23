@@ -15,7 +15,7 @@ db = SQLAlchemy(app)
 class Member(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(64))
-    status = db.Column(db.String(10), default="start")
+    status = db.Column(db.String(10), default="finish")
     days = db.Column(db.Integer, default=1)
     max_days = db.Column(db.Integer, default=1)
     date = db.Column(db.DateTime)
@@ -40,8 +40,72 @@ class Team(db.Model):
 
 @app.route('/')
 def index():
-    team = Team.query.all()
-    return render_template('index.html', tm =team)
+    return render_template('index.html')
+
+@app.route('/name_submit', methods=['post'])
+def name_submit():
+    username = request.form['name']
+    memberSearch = Member.query.filter_by(name = username).first()
+    if (memberSearch == None):
+        teamdata = Team.query.all()
+        return render_template('team.html', td = teamdata, username = username)
+    else:
+        teamid = memberSearch.teamid
+        # 現在時刻の取得
+        nowdate = datetime.datetime.utcnow() + datetime.timedelta(hours=9)
+        ## デバッグ用(1日経過させる)
+        ## nowdate = datetime.datetime.utcnow() + datetime.timedelta(hours=9) + datetime.timedelta(days = 1)
+        # 分以下を補正
+        nowdate_rep = nowdate.replace(minute=0, second=0, microsecond=0)
+        # 基準となる時刻
+        teamsearch = Team.query.filter_by(id = teamid).first()
+        baseDate = teamsearch.date
+        # 基準となる時刻との差分を取る
+        diff_rep = nowdate_rep - baseDate
+        # 差分が23時間だった場合
+        if diff_rep.seconds == 23 * 60 * 60:
+            # 1時間加える
+            nowdate_rep = nowdate_rep + datetime.timedelta(hours = 1)
+        
+        # その名前のメンバーのステータスがfinish(startでない)とき
+        if memberSearch.status == "finish":
+            # その名前のメンバーの最終運動日時を取得
+            lastdate = memberSearch.date
+            # 現在時刻と最終運動日時を比較
+            diff_nl = nowdate_rep - lastdate
+            # 1日と1時間(25時間以内)もしくは0日と23時間の範囲にdiffが収まったとき
+            # すなわち、最後に運動した日の翌日に運動するとき
+            if (diff_nl.seconds < 60 * 60 and diff_nl.days == 1) or (diff_nl.seconds >= 23 * 60 * 60 and diff_nl.days == 0):
+                # そのMemberをstart状態にして連続日数を1追加し、最終運動日時を更新する
+                memberSearch.status = "start"
+                memberSearch.days += 1
+                memberSearch.date = nowdate_rep
+                # 最大継続日数の更新
+                if (memberSearch.days > memberSearch.max_days):
+                    memberSearch.max_days = memberSearch.days
+            # diffの範囲が設定された時間の前後1時間に収まり、かつ最後に運動した日から2日以上経過しているとき
+            elif (diff_nl.seconds <= 60 * 60 and diff_nl.days >= 2) or (diff_nl.seconds >= 23 * 60 * 60 and diff_nl.days >= 1):
+                # そのMemberをstart状態にして連続日数を初期化し、最終運動日時を更新する
+                memberSearch.status = "start"
+                memberSearch.days = 1
+                memberSearch.date = nowdate_rep
+                
+        db.session.commit()
+        return redirect(url_for("detail",id =teamid))
+
+@app.route('/teamchoice', methods=['post'])
+def teamchoice():
+    username = request.form['username']
+    # ここでusernameと一致するメンバーをもう一度検索しないと、Fumioが大量発生してしまう！
+    memberSearch = Member.query.filter_by(name = username).first()
+    if memberSearch == None:
+        teamid = int(request.form['teamid'])
+        teamsearch = Team.query.get(teamid)
+        baseDate = teamsearch.date
+        newMember = Member(name=username, date=baseDate, teamid=teamid)
+        db.session.add(newMember)
+        db.session.commit()
+    return redirect('/')
 
 @app.route('/detail/<int:id>')
 def detail(id):
