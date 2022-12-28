@@ -41,12 +41,6 @@
     <div class="active-number">{{mn}} </div>
     </div>
 
-    <table border="1">
-      <tr><th>名前</th><th>運動内容</th></tr>
-      {% for member in ms %}
-        <tr><td>{{member.name}}</td><td>{{member.training_detail}}</td></tr>
-      {% endfor %}
-    </table>
     <div class="active-users">
     {% for member in ms%}
     <div class="active-user-item">
