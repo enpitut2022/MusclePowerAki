@@ -5,13 +5,21 @@
     <link rel="stylesheet" href="/static/css/style.css">
   </head>
   <body>
-    <h1>走れ三日坊主</h1>
-    <p>ようこそ！</p>
-    <p>名前を入力して運動を開始しましょう！</p>
+    <div class="center">
+    <div class="bottom_title">
+      <h1>走れ三日坊主</h1>
+    </div>
+    <div class="bottom_body">
+      <p>ようこそ！</p>
+      <p>名前を入力して運動を開始しましょう！</p>
+    </div>
     <form action="/name_submit" method="post" onsubmit="save()">
-        <div><input type="text" name="name" placeholder="名前を入力" id="username" required></div>
+        <div class="bottom">
+          <input type="text" name="name" placeholder="名前を入力" id="username" required class="form_button">
+        </div>
         <p><input type="submit" value="START" class="submit_button"></p>
     </form>
+  </div>
   </body>
   <script src="/static/js/script.js"></script>
 </html>
