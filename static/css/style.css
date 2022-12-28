@@ -183,3 +183,22 @@ button.btn {
     color:green;
     font-size: 20px;
 }
+
+.usericon {
+    width: 50px;
+}
+
+.active-users {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.active-user-item {
+    text-align: center;
+    font-size: 0.7em;
+    width: 60px;
+}
+
+.active-user-item a {
+    text-decoration: none;
+}

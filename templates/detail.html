@@ -47,6 +47,16 @@
         <tr><td>{{member.name}}</td><td>{{member.training_detail}}</td></tr>
       {% endfor %}
     </table>
+    <div class="active-users">
+    {% for member in ms%}
+    <div class="active-user-item">
+      <a href="/profile/{{member.id}}">
+        <img src="/static/img/icon1.png" class="usericon">
+        <div>{{member.name}}</div>
+      </a>
+    </div>
+    {% endfor %}
+    </div>
 
     <h2>新着コメント</h2>
     <p>みんなで盛り上がろう！！！</p>
