@@ -30,7 +30,7 @@
   </div>
     <h2>{{td.name}}</h2>
     <p>{{td.description}}</p>
-    <p><a href="/">戻る</a></p>
+    <p><div><a href="/" class="back_button">戻る</a></div></p>
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
                 {% for category, message in messages %}

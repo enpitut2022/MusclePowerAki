@@ -308,3 +308,14 @@ button.btn {
     .h1_title {
     padding-top: 15%;
     }
+
+    .back_button {
+    border: 0;
+    background: orange;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 21px;  
+    width: 60px;
+    text-decoration: none;
+    }
