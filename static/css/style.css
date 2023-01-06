@@ -2,6 +2,34 @@ body {
     margin: 15px;
 }
 
+.title{
+    font-family: Impact;
+}
+
+.center {
+    text-align: center;
+}
+
+.form_button{
+    height: 40px;
+    width: 250px;
+    font-size: 30px;
+}
+
+.bottom_title {
+    padding-top: 10%;
+    font-family: Impact;
+    font-size: 25px;
+}
+
+.bottom_body {
+    padding-top: 25%;
+}
+
+.bottom {
+    padding-top: 30%;
+}
+
 .active-number{
     font-size: 50px;
 }
@@ -168,6 +196,7 @@ button.btn {
 .submit_button {
     height:60px;
     width: 250px;
+    font-size: 25px;
 }
 
 .comment {
