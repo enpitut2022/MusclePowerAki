@@ -285,4 +285,7 @@ button.btn {
     padding: 10px 20px;
     border-radius: 10px;
     font-size: 21px;
+    position:fixed;
+    right: 15px;
+    top: 15px;
     }
