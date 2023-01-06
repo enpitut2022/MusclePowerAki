@@ -20,6 +20,16 @@
         <p><input type="submit" value="START" class="submit_button"></p>
     </form>
   </div>
+  <div class="modal-overlay closed" id="modal-overlay"></div>
+    <div class="modal closed" id="modal">
+      <button class="close-button" id="close-button">閉じる</button>
+      <div class="modal-guts">
+        <h4>ポップアップウィンドウ</h4>
+        <p>この窓が表示されている間は窓の外の操作はできません。ウィンドウを閉じて操作して下さい。</p>
+      </div>
+    </div>
+    <button id="open-button" class="open-button">ポップアップ表示</button>
   </body>
   <script src="/static/js/script.js"></script>
+  <script src="/static/js/popup.js"></script>
 </html>
