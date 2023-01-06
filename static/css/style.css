@@ -121,7 +121,7 @@ button.btn {
 }
 
 .btn--yellow {
-  color: #000;
+  color: #fff;
   background-color: orange;
   position: absolute;
   top: 10px;
@@ -132,7 +132,7 @@ button.btn {
   justify-content: center;
   align-items: center;
   z-index: 90;
-  font-size: 7px;
+  font-size: 0.8rem;
 }
 
 /* .btn--yellow:hover {
@@ -303,4 +303,8 @@ button.btn {
     position:fixed;
     right: 15px;
     top: 15px;
+    }
+
+    .h1_title {
+    padding-top: 15%;
     }

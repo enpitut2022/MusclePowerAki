@@ -6,7 +6,7 @@
   </head>
   <body>
     <div class="center">
-    <h1>走れ三日坊主</h1>
+    <h1 class="h1_title">走れ三日坊主</h1>
     <h2>グループ一覧</h2></div>
     <p>はじめまして！</p>
     <p>まず最初に、グループを選択してください。</p>
@@ -26,6 +26,24 @@
       <input type ="hidden" name="username" value={{username}}>
       <p class="center"><input type="submit" value="決定" class="enroll_button"></p>
     </form>
+    <div class="modal-overlay closed" id="modal-overlay"></div>
+    <div class="modal closed" id="modal">
+      <button class="close-button" id="close-button">閉じる</button>
+      <div class="modal-guts">
+        <h3>走れ三日坊主の使い方！</h3>
+        <p>
+          1. 名前を入力する<br>
+          2. 自分の運動する時間のグループを選択<br>
+          3. STARTを押してLet's 運動！<br>
+          <br>
+          注意！<br>
+          運動開始する時間に制限があります。<br>
+          (例)20時のグループ → 19 ~ 21時に開始可能！
+        </p>
+      </div>
+    </div>
+    <button id="open-button" class="open-button">使い方</button>
   </body>
   <script src="/static/js/script.js"></script>
+  <script src="/static/js/popup.js"></script>
 </html>
