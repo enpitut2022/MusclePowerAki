@@ -1,9 +1,17 @@
 body {
     margin: 15px;
+    background-color: #eac388
 }
 
 .title{
     font-family: Impact;
+}
+
+.enroll_button{
+    height: 50px; 
+    width: 120px;
+    font-size: 30px;
+    text-align: center;
 }
 
 .center {
@@ -193,6 +201,12 @@ button.btn {
     text-overflow: ellipsis;
 }
 
+.center_center{
+    text-align: center;
+    padding-top: 10%;
+    font-family: Impact;
+    font-size: 25px;
+}
 .submit_button {
     height:60px;
     width: 250px;

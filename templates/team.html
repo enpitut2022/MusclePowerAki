@@ -5,8 +5,9 @@
     <link rel="stylesheet" href="/static/css/style.css">
   </head>
   <body>
+    <div class="center">
     <h1>走れ三日坊主</h1>
-    <h2>グループ一覧</h2>
+    <h2>グループ一覧</h2></div>
     <p>はじめまして！</p>
     <p>まず最初に、グループを選択してください。</p>
     {% for team in tm %}
@@ -23,7 +24,7 @@
         {% endif %}
       {% endfor %}
       <input type ="hidden" name="username" value={{username}}>
-      <input type="submit" value="決定">
+      <p class="center"><input type="submit" value="決定" class="enroll_button"></p>
     </form>
   </body>
   <script src="/static/js/script.js"></script>
