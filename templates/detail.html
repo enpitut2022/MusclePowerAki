@@ -25,21 +25,34 @@
           <!--ここまでメニュー-->
       </div>
   </header>
+  <div class="title">
     <h1>走れ三日坊主</h1>
+  </div>
     <h2>{{td.name}}</h2>
     <p>{{td.description}}</p>
-    <p><a href="/">戻る</a></p>
+    <p><div><a href="/" class="back_button">戻る</a></div></p>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+        {% endif %}
+    {% endwith %}
     <div>
       アクティブ人数 :
     <div class="active-number">{{mn}} </div>
     </div>
 
-    <table border="1">
-      <tr><th>名前</th><th>運動内容</th></tr>
-      {% for member in ms %}
-        <tr><td>{{member.name}}</td><td>{{member.training_detail}}</td></tr>
-      {% endfor %}
-    </table>
+    <div class="active-users">
+    {% for member in ms%}
+    <div class="active-user-item">
+      <a href="/profile/{{member.id}}">
+        <img src="/static/img/icon1.png" class="usericon">
+        <div>{{member.name}}</div>
+      </a>
+    </div>
+    {% endfor %}
+    </div>
 
     <h2>新着コメント</h2>
     <p>みんなで盛り上がろう！！！</p>
@@ -49,6 +62,10 @@
         <p>
           <button type="submit" name="comment" value="こんにちは！">こんにちは！</button>
           <button type="submit" name="comment" value="これから運動やります">これから運動やります</button>
+          <button type="submit" name="comment" value="運動終わりました">運動終わりました</button>
+          <button type="submit" name="comment" value="お疲れさま！">お疲れさま！</button>
+          <button type="submit" name="comment" value="すごい！">すごい！</button>
+          <button type="submit" name="comment" value="筋肉が喜んでいる！">筋肉が喜んでいる！</button>
         </p>
         <input type ="hidden" name="teamid" value={{td.id}}>
     </form>
@@ -65,6 +82,6 @@
   <script>
     setTimeout(function () {
       location.reload();
-    }, 10000);
+    }, 15000);
   </script>
 </html>
